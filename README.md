@@ -1,41 +1,6 @@
 GRUPO: Lucas Furquim ; Diogo Chiaradia ; Gustavo Torres de Oliveira
 
-# Análise Preditiva de Energias Renováveis e Meteorologia (ANEEL & Open-Meteo)
-
-Repositório desenvolvido para fins acadêmicos e aplicados com foco em Ciência de Dados e Machine Learning. O projeto realiza a extração, tratamento e modelagem preditiva utilizando dados abertos do setor elétrico brasileiro (ANEEL) combinados com dados meteorológicos horários da API Open-Meteo.
-
----
-
-## 🎯 Sobre o Projeto
-
-O projeto divide-se em duas grandes frentes de Machine Learning aplicadas ao setor de energias renováveis:
-
-1. **Tarefa de Classificação (ANEEL)**: 
-   * Coleta de dados abertos de empreendimentos de geração de energia (SIGA/ANEEL) via API.
-   * Tratamento de coordenadas geográficas, limpeza de valores numéricos e padronização.
-   * Categorização das usinas em três classes principais de fontes renováveis: **Solar**, **Eólica** e **Hidráulica**.
-   * Treinamento e avaliação de modelos de classificação para prever o tipo de fonte de energia com base em atributos estruturais e geográficos.
-
-2. **Tarefa de Regressão (Open-Meteo)**:
-   * Coleta de dados meteorológicos históricos e horários para o município de **Petrolina (PE)**.
-   * Engenharia de variáveis para estruturação do dataset.
-   * Treinamento e avaliação de modelos de regressão com o objetivo de estimar/prever a **radiação solar** com base em variáveis climáticas.
-
----
-
-## 🛠️ Tecnologias e Bibliotecas Utilizadas
-
-O pipeline foi inteiramente programado em **Python**, utilizando o ambiente do Google Colab e as seguintes bibliotecas:
-* **Manipulação e Análise de Dados**: `pandas`, `numpy`
-* **Requisições de APIs**: `requests` (com tratamento de repetição/`retry`)
-* **Visualização de Dados**: `matplotlib`, `seaborn`
-* **Machine Learning**: `scikit-learn` (pré-processamento, métricas de avaliação, modelos de classificação e regressão)
-
----
-
-## 📂 Estrutura do Repositório
-
-```text
-├── aneel_classificacao_orange.csv  # Dataset tratado gerado na etapa de classificação
-├── notebook_projeto.ipynb          # Notebook principal contendo todo o código executável
-└── README.md                       # Documentação do projeto
+Análise Preditiva de Energias Renováveis e Meteorologia (ANEEL & Open-Meteo)Este repositório contém o código e a documentação para um projeto de Ciência de Dados e Aprendizado de Máquina (Machine Learning) voltado para o setor de energias renováveis. O sistema integra a extração de dados abertos do setor elétrico brasileiro fornecidos pela ANEEL com dados meteorológicos horários obtidos por meio da API do Open-Meteo.   Visão Geral do ProjetoO objetivo central é estruturar um pipeline completo que abrange a coleta automatizada de dados, tratamento, engenharia de atributos e aplicação de modelos preditivos divididos em duas frentes analíticas:Tarefa de Classificação (ANEEL):Coleta paginada de dados abertos de empreendimentos de geração de energia (SIGA/ANEEL).   Tratamento de coordenadas geográficas, limpeza de valores numéricos e padronização.   Agrupamento e categorização das fontes de geração em três classes principais: Solar, Eólica e Hidráulica.   Aplicação e comparação de modelos de aprendizado de máquina voltados para classificação.Tarefa de Regressão (Open-Meteo):Coleta de dados meteorológicos históricos e horários para o município de Petrolina (PE).Estruturação de variáveis explicativas com foco na estimativa ou previsão da radiação solar.Treinamento e avaliação de modelos de regressão para prever o comportamento da radiação com base nas condições climáticas.Tecnologias e Bibliotecas UtilizadasO projeto foi inteiramente desenvolvido em Python dentro do ambiente do Google Colab, fazendo uso das seguintes bibliotecas:   Manipulação e Análise de Dados: pandas, numpy   Requisições de APIs: requests (implementando estratégias de repetição/retry para estabilidade nas chamadas)   Visualização de Dados: matplotlib, seaborn   Aprendizado de Máquina: scikit-learn (utilizado para pré-processamento, métricas de avaliação e algoritmos de classificação e regressão)   Estrutura do RepositórioPlaintext├── aneel_classificacao_orange.csv  # Dataset tratado gerado na etapa de classificação da ANEEL
+├── notebook_projeto.ipynb          # Notebook principal contendo o código executável do pipeline
+└── README.md                       # Documentação técnica do repositório
+Metodologia e Etapas do PipelineColeta de Dados:Requisições estruturadas à API de dados abertos da ANEEL e endpoints horários do Open-Meteo.Pré-pesprocessamento e Limpeza:Conversão de formatos numéricos (adequação de strings com vírgulas para o padrão de ponto flutuante).Filtragem de coordenadas geográficas e potências válidas.   Geração e exportação do arquivo tratado aneel_classificacao_orange.csv.   Análise Exploratória de Dados (EDA):Geração de gráficos estatísticos e de distribuição para visualização do comportamento das variáveis.   Modelagem Preditiva:Divisão dos dados em conjuntos de treino e teste.Treinamento e comparação de desempenho de três modelos distintos para cada tarefa (classificação e regressão).Avaliação utilizando métricas apropriadas para cada contexto (como acurácia e matriz de confusão para classificação; erro quadrático médio e coeficiente de determinação para regressão).Instruções de ExecuçãoClone o repositório ou obtenha o arquivo do notebook (.ipynb).Abra o arquivo em um ambiente compatível com Jupyter Notebook ou faça o upload diretamente para o Google Colab.Execute as células de forma sequencial para reproduzir todas as etapas de coleta, tratamento e modelagem preditiva.
