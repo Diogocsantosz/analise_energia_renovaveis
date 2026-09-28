@@ -1,15 +1,41 @@
-APIs, energias renováveis e aprendizado de máquina
-Análise de duas tarefas independentes em Python: classificação da fonte renovável de empreendimentos cadastrados na ANEEL e regressão da radiação solar horária em Petrolina (PE). O notebook analise_energias_renovaveis.ipynb consulta as APIs, gera os CSVs, explora as variáveis e compara seis modelos.
-Dados
-- ANEEL, SIGA: recurso diário siga-empreendimentos-geracao-diario.csv do portal de dados abertos. O notebook usa a API CKAN pública, com paginação. A data do cadastro corresponde à data da execução; os resultados podem variar quando ele for atualizado. UFV vira Solar, EOL vira Eólica; UHE, PCH e CGH viram Hidráulica. Entradas: potência outorgada (kW), latitude e longitude; alvo: fonte. O cadastro abrange diferentes fases e não mede geração elétrica.
-- Open-Meteo: API histórica, coordenadas aproximadas −9,39, −40,50, Petrolina (PE), 01/04/2025 a 30/06/2025, fuso America/Recife. Das respostas horárias, são usadas as horas locais de 7h a 17h, total esperado de 1001 linhas. Entradas: temperatura, umidade, cobertura de nuvens, vento e hora; alvo: radiação de onda curta (W/m², média da hora anterior). Esses dados vêm de modelos/reanálise, não de medição de painel.
-As duas consultas são públicas e não exigem token. Nenhuma credencial deve ser colocada no notebook ou no repositório.
-Como reproduzir
-1. Use Python 3.10 ou mais recente e instale as dependências: python -m pip install -r requirements.txt.
-2. Abra analise_energias_renovaveis.ipynb no Jupyter ou Google Colab e execute todas as células em ordem, com internet. Alternativamente, use jupyter nbconvert --to notebook --execute analise_energias_renovaveis.ipynb --output analise_energias_renovaveis_executado.ipynb.
-3. Os arquivos aneel_classificacao_orange.csv e meteo_regressao_orange.csv aparecem no diretório de execução. No Colab, baixe os dois arquivos do painel de arquivos. O notebook verifica os campos retornados, a paginação da ANEEL, as três classes e as 1001 horas esperadas da Open-Meteo. Se a API mudar, a execução indica a etapa a revisar.
-4. Antes da entrega, execute o notebook, confira as tabelas e gráficos e, se preferir, inclua os CSVs e o notebook executado no repositório público. As instruções acima permitem reproduzir os CSVs mesmo sem publicá-los.
-Avaliação e conclusões
-- Classificação: regressão logística, KNN (k=7) e floresta aleatória usam as mesmas entradas e o mesmo teste estratificado de 20% (random_state=42). São comparados Accuracy, Precision, Recall e F1 com média macro, além das três matrizes de confusão. O notebook imprime o modelo com melhor F1 macro e a confusão mais frequente. Potência e posição se sobrepõem entre fontes; previsões não demonstram geração efetiva.
-- Regressão: Ridge, floresta aleatória e gradient boosting usam as primeiras 80% das horas para treino e as últimas 20% para teste, sem embaralhar. O notebook apresenta MAE (W/m²), MSE ((W/m²)²), R² e gráficos de valores reais × previstos. A hora captura o ciclo solar diário, mas a radiação horizontal não é produção de eletricidade: área, orientação, eficiência e perdas dos módulos e inversores não estão modeladas.
-Os valores exatos das métricas devem ser lidos nas saídas do notebook após executá-lo. Não há resultados fixos para a ANEEL, cuja base diária é atualizada. O teste de radiação cobre somente um período e uma cidade, portanto não garante desempenho em outras estações ou localidades.
+GRUPO: Lucas Furquim ; Diogo Chiaradia ; Gustavo Torres de Oliveira
+
+# Análise Preditiva de Energias Renováveis e Meteorologia (ANEEL & Open-Meteo)
+
+Repositório desenvolvido para fins acadêmicos e aplicados com foco em Ciência de Dados e Machine Learning. O projeto realiza a extração, tratamento e modelagem preditiva utilizando dados abertos do setor elétrico brasileiro (ANEEL) combinados com dados meteorológicos horários da API Open-Meteo.
+
+---
+
+## 🎯 Sobre o Projeto
+
+O projeto divide-se em duas grandes frentes de Machine Learning aplicadas ao setor de energias renováveis:
+
+1. **Tarefa de Classificação (ANEEL)**: 
+   * Coleta de dados abertos de empreendimentos de geração de energia (SIGA/ANEEL) via API.
+   * Tratamento de coordenadas geográficas, limpeza de valores numéricos e padronização.
+   * Categorização das usinas em três classes principais de fontes renováveis: **Solar**, **Eólica** e **Hidráulica**.
+   * Treinamento e avaliação de modelos de classificação para prever o tipo de fonte de energia com base em atributos estruturais e geográficos.
+
+2. **Tarefa de Regressão (Open-Meteo)**:
+   * Coleta de dados meteorológicos históricos e horários para o município de **Petrolina (PE)**.
+   * Engenharia de variáveis para estruturação do dataset.
+   * Treinamento e avaliação de modelos de regressão com o objetivo de estimar/prever a **radiação solar** com base em variáveis climáticas.
+
+---
+
+## 🛠️ Tecnologias e Bibliotecas Utilizadas
+
+O pipeline foi inteiramente programado em **Python**, utilizando o ambiente do Google Colab e as seguintes bibliotecas:
+* **Manipulação e Análise de Dados**: `pandas`, `numpy`
+* **Requisições de APIs**: `requests` (com tratamento de repetição/`retry`)
+* **Visualização de Dados**: `matplotlib`, `seaborn`
+* **Machine Learning**: `scikit-learn` (pré-processamento, métricas de avaliação, modelos de classificação e regressão)
+
+---
+
+## 📂 Estrutura do Repositório
+
+```text
+├── aneel_classificacao_orange.csv  # Dataset tratado gerado na etapa de classificação
+├── notebook_projeto.ipynb          # Notebook principal contendo todo o código executável
+└── README.md                       # Documentação do projeto
