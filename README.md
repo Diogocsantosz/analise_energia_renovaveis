@@ -36,17 +36,20 @@ O pipeline foi inteiramente programado em **Python**, utilizando o ambiente do G
 
 ---
 
-## Comparação entre os Gráficos
+## Comparação dos Modelos
 
-A análise dos gráficos permite observar diferentes aspectos relacionados às fontes de energia renovável presentes nos dados da ANEEL.
+| Exercício          | Tipo de tarefa | Modelos avaliados                                   | Métrica principal | Melhor modelo                   | Resultado        |
+| ------------------ | -------------- | --------------------------------------------------- | ----------------- | ------------------------------- | ---------------- |
+| **1 – ANEEL**      | Classificação  | Regressão Logística, KNN (k=7) e Floresta Aleatória | **F1 (macro)**    | **[modelo obtido no notebook]** | **[valor]**      |
+| **2 – Open-Meteo** | Regressão      | Ridge, Floresta Aleatória e Gradient Boosting       | **MAE**           | **[modelo obtido no notebook]** | **[valor] W/m²** |
 
-Enquanto um dos gráficos apresenta a **quantidade de empreendimentos** por fonte de energia, o outro apresenta a **potência outorgada**, permitindo comparar a quantidade de usinas com a capacidade de geração associada a cada fonte.
+### Interpretação
 
-Essa comparação é importante porque uma fonte pode apresentar uma quantidade maior de empreendimentos, mas isso não significa necessariamente que ela possua a maior capacidade de geração. Da mesma forma, uma fonte com menos empreendimentos pode apresentar uma potência outorgada elevada devido à existência de usinas de maior porte.
+No **Exercício 1**, os modelos são utilizados para classificar os empreendimentos de geração de energia nas categorias **Solar, Eólica e Hidráulica**. A comparação considera principalmente o **F1 (macro)**, pois essa métrica combina precisão e recall e atribui o mesmo peso às três classes.
 
-Dessa forma, os dois gráficos devem ser analisados em conjunto. O primeiro permite visualizar a **distribuição dos empreendimentos entre as fontes Solar, Eólica e Hidráulica**, enquanto o segundo demonstra como a **potência de geração está distribuída entre essas fontes**.
+No **Exercício 2**, os modelos são utilizados para estimar a **radiação solar em W/m²** a partir de variáveis meteorológicas. Nesse caso, o **MAE** é utilizado como principal referência: quanto menor o erro médio absoluto entre os valores reais e previstos, melhor o desempenho do modelo nessa métrica.
 
-A comparação entre quantidade de empreendimentos e potência outorgada proporciona uma visão mais completa dos dados, permitindo identificar diferenças entre a presença numérica das fontes renováveis e sua participação em termos de capacidade de geração.
+Os dois exercícios possuem objetivos diferentes e, por isso, seus resultados não devem ser comparados diretamente pelos valores numéricos. A comparação deve ser feita **dentro de cada tarefa**, identificando qual modelo apresentou o melhor desempenho de acordo com a métrica definida.
 
 ---
 
