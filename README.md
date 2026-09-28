@@ -1,4 +1,4 @@
-GRUPO: Lucas Furquim ; Diogo Chiaradia ; Gustavo Torres de Oliveira
+GRUPO: Lucas Furquim (RM: 568690) ; Diogo Chiaradia (RM: 570246) ; Gustavo Torres de Oliveira (RM: 572952)
 
 # Análise Preditiva de Energias Renováveis e Meteorologia (ANEEL & Open-Meteo)
 
